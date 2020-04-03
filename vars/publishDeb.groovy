@@ -6,7 +6,7 @@ def call(Map config) {
   def repoName = config.get("repoName");
 
   sh """
-    EXISTS="\$(aptly repo list --raw | grep "${repoName}")"
+    EXISTS="\$(aptly repo list --raw || grep \\"${repoName}\\")"
     if [ -z "\$EXISTS" ]
     then
         aptly repo create -component="${component}" "${repoName}"
